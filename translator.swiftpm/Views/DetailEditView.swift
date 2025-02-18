@@ -10,18 +10,31 @@ struct DetailEditView: View {
 
     var body: some View {
         Form {
-            Section(header: Text("Meeting Info")) {
+            Section(header: Text("To-do information")) {
                 TextField("Title", text: $scrum.title)
                 HStack {
                     Slider(value: $scrum.lengthInMinutesAsDouble, in: 5...30, step: 1) {
                         Text("Length")
                     }
                     .accessibilityValue("\(scrum.lengthInMinutes) minutes")
+                    
                     Spacer()
                     Text("\(scrum.lengthInMinutes) minutes")
                         .accessibilityHidden(true)
                 }
+                //TextField("Description", text: $scrum.description, axis: .vertical)
+                PriorityPicker(selection: $scrum.priority)
                 ThemePicker(selection: $scrum.theme)
+            }
+            Section(header: Text("Description")) {
+                TextField("Description", text: $scrum.description, axis: .vertical)
+            }
+            Section(header: Text("Deadline")) {
+                DatePicker("Deadline", selection: $scrum.deadline,displayedComponents: [.date, .hourAndMinute])
+                        .datePickerStyle(.graphical)
+                        .accessibilityValue("\(scrum.deadline)")
+                Text("\(scrum.deadline)")
+                    .accessibilityHidden(true)
             }
 //            Section(header: Text("Attendees")) {
 //                ForEach(scrum.attendees) { attendee in

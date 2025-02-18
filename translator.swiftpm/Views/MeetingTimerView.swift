@@ -9,17 +9,17 @@ struct MeetingTimerView: View {
     let isRecording: Bool
     let theme: Theme
     
-    private var currentSpeaker: String {
-        speakers.first(where: { !$0.isCompleted })?.name ?? "Someone"
-    }
+//    private var currentSpeaker: String {
+//        speakers.first(where: { !$0.isCompleted })?.name ?? "Someone"
+//    }
     
     var body: some View {
         Circle()
             .strokeBorder(lineWidth: 24)
             .overlay {
                 VStack {
-                    Text(currentSpeaker)
-                        .font(.title)
+//                    Text(currentSpeaker)
+//                        .font(.title)
                     Text("is speaking")
                     Image(systemName: isRecording ? "mic" : "mic.slash")
                         .font(.title)

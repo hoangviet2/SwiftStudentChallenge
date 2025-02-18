@@ -9,23 +9,23 @@ struct ScrumsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var isPresentingNewScrumView = false
     let saveAction: ()->Void
-
+    
     var body: some View {
         NavigationStack {
-            List($scrums) { $scrum in
+            List($scrums.sorted(by: { $0.deadline.wrappedValue < $1.deadline.wrappedValue })) { $scrum in
                 NavigationLink(destination: DetailView(scrum: $scrum)) {
                     CardView(scrum: scrum)
                 }
                 .listRowBackground(scrum.theme.mainColor)
             }
-            .navigationTitle("Daily Scrums")
+            .navigationTitle("Greeting,")
             .toolbar {
                 Button(action: {
                     isPresentingNewScrumView = true
                 }) {
                     Image(systemName: "plus")
                 }
-                .accessibilityLabel("New Scrum")
+                .accessibilityLabel("New to-do")
             }
         }
         .sheet(isPresented: $isPresentingNewScrumView) {

@@ -16,9 +16,12 @@ class ScrumStore: ObservableObject {
         .appendingPathComponent("scrums.data")
     }
     
+
+    
     func load() async throws {
         let task = Task<[DailyScrum], Error> {
             let fileURL = try Self.fileURL()
+            print(fileURL)
             guard let data = try? Data(contentsOf: fileURL) else {
                 return []
             }

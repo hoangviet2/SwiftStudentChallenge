@@ -12,16 +12,16 @@ struct DetailView: View {
     
     var body: some View {
         List {
-            Section(header: Text("Meeting Info")) {
+            Section(header: Text("Task Info")) {
                 NavigationLink(destination: MeetingView(scrum: $scrum)) {
-                    Label("Start Meeting", systemImage: "timer")
+                    Label("Done", systemImage: "checkmark.circle.fill")
                         .font(.headline)
                         .foregroundColor(.accentColor)
                 }
                 HStack {
-                    Label("Length", systemImage: "clock")
+                    Label("Deadline: ", systemImage: "calendar.badge.exclamationmark")
                     Spacer()
-                    Text("\(scrum.lengthInMinutes) minutes")
+                    Text(scrum.deadline, format: .dateTime.day().month().year())
                 }
                 .accessibilityElement(children: .combine)
                 HStack {
@@ -51,6 +51,16 @@ struct DetailView: View {
                             Text(history.date, style: .date)
                         }
                     }
+                }
+            }
+            Section(header: Text("Description")) {
+                if scrum.description.isEmpty {
+                    Label("Try again", systemImage: "calendar.badge.exclamationmark")
+                }else{
+                    HStack{
+                        Text(scrum.description)
+                    }
+
                 }
             }
         }

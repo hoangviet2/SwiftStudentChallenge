@@ -37,13 +37,13 @@ final class ScrumTimer: ObservableObject {
     private var frequency: TimeInterval { 1.0 / 60.0 }
     private var lengthInSeconds: Int { lengthInMinutes * 60 }
     private var secondsPerSpeaker: Int {
-        (lengthInMinutes * 60) / speakers.count
+        (lengthInMinutes * 60)
     }
     private var secondsElapsedForSpeaker: Int = 0
     private var speakerIndex: Int = 0
     private var speakerText: String {
-        //return "Speaker \(speakerIndex + 1): " + speakers[speakerIndex].name
-        return "Speaker TEST: "
+        return "Speaker \(speakerIndex + 1): " + speakers[speakerIndex].name
+        //return "Speaker TEST: "
     }
     private var startDate: Date?
     
@@ -55,8 +55,11 @@ final class ScrumTimer: ObservableObject {
         - lengthInMinutes: The meeting length.
         -  attendees: A list of attendees for the meeting.
      */
-    init(lengthInMinutes: Int = 0) {
+    init(lengthInMinutes: Int = 0, attendees: [DailyScrum.Attendee] = []) {
+        //print(DailyScrum.Attendee.name)
+        print(attendees.count)
         self.lengthInMinutes = lengthInMinutes
+        self.speakers = attendees.speakers
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
     }
@@ -92,8 +95,7 @@ final class ScrumTimer: ObservableObject {
         guard index < speakers.count else { return }
         speakerIndex = index
         activeSpeaker = speakerText
-
-        secondsElapsed = index * secondsPerSpeaker
+        secondsElapsed = secondsPerSpeaker
         secondsRemaining = lengthInSeconds - secondsElapsed
         startDate = Date()
     }
@@ -102,20 +104,26 @@ final class ScrumTimer: ObservableObject {
 
         Task { @MainActor in
             guard let startDate,
-                  !timerStopped else { return }
-            let secondsElapsed = Int(Date().timeIntervalSince1970 - startDate.timeIntervalSince1970)
-            secondsElapsedForSpeaker = secondsElapsed
-            print(secondsElapsedForSpeaker)
-            self.secondsElapsed = secondsPerSpeaker * speakerIndex + secondsElapsedForSpeaker
-            guard secondsElapsed <= secondsPerSpeaker else {
+                  !timerStopped
+            else {
+                //print(startDate)
                 return
             }
-            secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
-
-            if secondsElapsedForSpeaker >= secondsPerSpeaker {
-                changeToSpeaker(at: speakerIndex + 1)
-                speakerChangedAction?()
-            }
+            let secondsElapsed = Int(Date().timeIntervalSince1970 - startDate.timeIntervalSince1970)
+//            secondsElapsedForSpeaker = secondsElapsed
+//            print(secondsElapsedForSpeaker)
+            self.secondsElapsed = secondsElapsed
+//            guard secondsElapsed <= secondsPerSpeaker else {
+//                return
+//            }
+            
+            //secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
+//            secondsRemaining = self.secondsElapsed
+//            print(secondsRemaining)
+//            if secondsElapsedForSpeaker >= secondsPerSpeaker {
+//                changeToSpeaker(at: speakerIndex + 1)
+//                speakerChangedAction?()
+//            }
         }
     }
     
@@ -126,20 +134,20 @@ final class ScrumTimer: ObservableObject {
          - lengthInMinutes: The meeting length.
          - attendees: The name of each attendee.
      */
-    func reset(lengthInMinutes: Int) {
+    func reset(lengthInMinutes: Int, attendees: [DailyScrum.Attendee]) {
         self.lengthInMinutes = lengthInMinutes
+        self.speakers = attendees.speakers
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
     }
 }
+extension Array<DailyScrum.Attendee> {
+    var speakers: [ScrumTimer.Speaker] {
+        if isEmpty {
+            return [ScrumTimer.Speaker(name: "Speaker 1", isCompleted: false)]
+        } else {
+            return map { ScrumTimer.Speaker(name: $0.name, isCompleted: false) }
+        }
+    }
+}
 
-
-//extension Array<DailyScrum.Attendee> {
-//    var speakers: [ScrumTimer.Speaker] {
-//        if isEmpty {
-//            return [ScrumTimer.Speaker(name: "Speaker 1", isCompleted: false)]
-//        } else {
-//            return map { ScrumTimer.Speaker(name: $0.name, isCompleted: false) }
-//        }
-//    }
-//}
