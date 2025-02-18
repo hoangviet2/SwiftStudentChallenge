@@ -25,6 +25,6 @@ struct PriorityView: View {
 
 struct PriorityView_Preview: PreviewProvider {
     static var previews: some View {
-        PriorityView(priority: .daily)
+        PriorityView(priority: .high)
     }
 }

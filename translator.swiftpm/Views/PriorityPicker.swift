@@ -23,6 +23,6 @@ struct PriorityPicker: View {
 
 struct PriorityPicker_Preview: PreviewProvider {
     static var previews: some View {
-        PriorityPicker(selection: .constant(.essential))
+        PriorityPicker(selection: .constant(.low))
     }
 }

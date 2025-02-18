@@ -13,7 +13,14 @@ struct CardView: View {
                 .accessibilityAddTraits(.isHeader)
             Spacer()
             HStack {
-                Label("4", systemImage: "checkmark.circle")
+                if(scrum.deadline < Date()){
+                    Label("\(scrum.deadline.formatted(.dateTime))", systemImage: "checkmark.circle")
+                        .foregroundStyle(.red)
+                }else{
+                    Label("\(scrum.deadline.formatted(.dateTime))", systemImage: "checkmark.circle")
+                }
+                
+                    
                     //.accessibilityLabel("4 attendees")
                 Spacer()
                 Label("Priority: ", systemImage: "\(scrum.priority.displayImage)")

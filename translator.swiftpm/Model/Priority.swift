@@ -9,22 +9,22 @@ import SwiftUI
 
 enum Priority: String, CaseIterable, Identifiable, Codable {
 
-    case essential
-    case normal
-    case daily
+    case low
+    case medium
+    case high
     
     var accentColor: Color {
         switch self {
-        case .normal, .essential: return .black
-        case .daily: return .white
+        case .low, .medium: return .black
+        case .high: return .white
         }
     }
     
     var displayImage: String{
         switch self{
-        case .normal: return "exclamationmark"
-        case .daily: return "exclamationmark.2"
-        case .essential: return "exclamationmark.3"
+        case .low: return "exclamationmark"
+        case .medium: return "exclamationmark.2"
+        case .high: return "exclamationmark.3"
         }
     }
     
@@ -32,9 +32,9 @@ enum Priority: String, CaseIterable, Identifiable, Codable {
     
     var mainColor: Color {
         switch self{
-        case .normal: return Color("yellow")
-        case .daily: return Color("orange")
-        case .essential: return Color("red")
+        case .low: return Color("yellow")
+        case .medium: return Color("orange")
+        case .high: return Color("red")
         }
 
     }

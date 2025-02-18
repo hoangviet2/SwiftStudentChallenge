@@ -22,7 +22,7 @@ struct MyApp: App {
                     try await store.load()
                 } catch {
                     errorWrapper = ErrorWrapper(error: error,
-                                                guidance: "Scrumdinger will load sample data and continue.")
+                                                guidance: "We will load sample data and continue.")
                 }
             }
             .sheet(item: $errorWrapper) {

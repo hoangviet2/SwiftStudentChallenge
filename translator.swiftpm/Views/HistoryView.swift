@@ -20,7 +20,11 @@ struct HistoryView: View {
                     Text(transcript)
                     Text("Sugesstion")
                         .font(.headline)
-                    Text(SEN.findAnswer(document: transcript))
+                    if(transcript.count == 0){
+                        Text("We can not detect your feeling, please do the test again")
+                    }else{
+                        Text("You seem \(SEN.findAnswer(document: transcript))")
+                    }
 
                 }
             }

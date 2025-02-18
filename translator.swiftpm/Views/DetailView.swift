@@ -21,9 +21,17 @@ struct DetailView: View {
                 HStack {
                     Label("Deadline: ", systemImage: "calendar.badge.exclamationmark")
                     Spacer()
-                    Text(scrum.deadline, format: .dateTime.day().month().year())
+                    Text(scrum.deadline, format: .dateTime)
                 }
                 .accessibilityElement(children: .combine)
+                HStack {
+                    Label("Priority: ", systemImage: "\(scrum.priority.displayImage)")
+                    Spacer()
+                    //Text(scrum.deadline, format: .dateTime.day().month().year())
+                    Text(scrum.priority.name)
+                }
+                .accessibilityElement(children: .combine)
+
                 HStack {
                     Label("Theme", systemImage: "paintpalette")
                     Spacer()

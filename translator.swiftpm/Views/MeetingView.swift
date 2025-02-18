@@ -10,6 +10,8 @@ struct MeetingView: View {
     @StateObject var scrumTimer = ScrumTimer()
     @StateObject var speechRecognizer = SpeechRecognizer()
     @State private var isRecording = false
+    @State private var errorWrapper: ErrorWrapper?
+
     
     private var player: AVPlayer { AVPlayer.sharedDingPlayer }
     
@@ -20,7 +22,6 @@ struct MeetingView: View {
             VStack {
                 MeetingHeaderView(secondsElapsed: scrumTimer.secondsElapsed, secondsRemaining: scrumTimer.secondsRemaining, theme: scrum.theme)
                 MeetingTimerView(speakers: scrumTimer.speakers, isRecording: isRecording, theme: scrum.theme)
-                //MeetingFooterView(speakers: scrumTimer.speakers, skipAction: scrumTimer.skipSpeaker)
                 MeetingFooterView(speakers: scrumTimer.speakers,skipAction: scrumTimer.skipSpeaker)
             }
         }
@@ -36,7 +37,6 @@ struct MeetingView: View {
     }
     
     private func startScrum() {
-        //scrumTimer.reset(lengthInMinutes: scrum.lengthInMinutes, attendees: scrum.attendees)
         scrumTimer.reset(lengthInMinutes: scrum.lengthInMinutes, attendees: scrum.attendees)
         scrumTimer.speakerChangedAction = {
             player.seek(to: .zero)

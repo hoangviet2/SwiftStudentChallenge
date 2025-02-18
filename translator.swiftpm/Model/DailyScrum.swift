@@ -11,7 +11,7 @@ struct DailyScrum: Identifiable, Codable {
     var priority: Priority
     var deadline: Date
     var description: String
-    var question:[String] =  ["Advantages","Felling","Disadvantages"]
+    var question:[String] =  ["feeling"]
     var attendees: [Attendee]
     var lengthInMinutesAsDouble: Double {
         get {
@@ -24,7 +24,7 @@ struct DailyScrum: Identifiable, Codable {
     var theme: Theme
     var history: [History] = []
     
-    init(id: UUID = UUID(), title: String, lengthInMinutes: Int, theme: Theme, priority: Priority, deadline: Date, description: String) {
+    init(id: UUID = UUID(), title: String, lengthInMinutes: Int = 1, theme: Theme, priority: Priority, deadline: Date, description: String) {
         self.id = id
         self.title = title
         self.lengthInMinutes = lengthInMinutes
@@ -33,7 +33,6 @@ struct DailyScrum: Identifiable, Codable {
         self.deadline = deadline
         self.description = description
         self.attendees = question.map {Attendee(name: $0)}
-        print("DAILY SCUM: \(attendees.count)")
     }
 }
 
@@ -49,7 +48,7 @@ extension DailyScrum {
     }
     
     static var emptyScrum: DailyScrum {
-        DailyScrum(title: "", lengthInMinutes: 5, theme: .sky, priority: .daily, deadline: Date.now, description: "")
+        DailyScrum(title: "", lengthInMinutes: 1, theme: .sky, priority: .low, deadline: Date.now, description: "")
     }
 }
 
@@ -57,16 +56,16 @@ extension DailyScrum {
     static let sampleData: [DailyScrum] =
     [
         DailyScrum(title: "Study",
-                   lengthInMinutes: 10,
+                   lengthInMinutes: 1,
                    theme: .yellow,
-                   priority: .daily, deadline: Date.now,description: "Come to class"),
+                   priority: .low, deadline: Date.now,description: "Come to class"),
         DailyScrum(title: "Code",
-                   lengthInMinutes: 5,
+                   lengthInMinutes: 1,
                    theme: .orange,
-                   priority: .daily, deadline: Date.now,description: "Coding Swift"),
+                   priority: .medium, deadline: Date.now,description: "Coding Swift"),
         DailyScrum(title: "Eat",
-                   lengthInMinutes: 5,
+                   lengthInMinutes: 1,
                    theme: .poppy,
-                   priority: .essential, deadline: Date.now,description: "Eating")
+                   priority: .high, deadline: Date.now,description: "Eating")
     ]
 }
