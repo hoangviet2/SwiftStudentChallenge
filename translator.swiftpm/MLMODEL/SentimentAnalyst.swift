@@ -13,7 +13,7 @@ class SentimentAnalyst{
                         "1":"joy",
                         "2":"love",
                         "3":"anger",
-                        "4":"fear"]
+                        "4":"fear","5":"surprise"]
     
     /// The underlying Core ML Model.
     var SentModel: Sentclass {

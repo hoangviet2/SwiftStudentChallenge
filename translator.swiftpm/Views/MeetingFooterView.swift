@@ -26,7 +26,7 @@ struct MeetingFooterView: View {
         VStack {
             HStack {
                 if isLastSpeaker {
-                    Text("Last question")
+                    Text("When you move back, just back to the DIAGNOSTIC to see")
                 } else {
                     Text(speakerText)
                     Spacer()

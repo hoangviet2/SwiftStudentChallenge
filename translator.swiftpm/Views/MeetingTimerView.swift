@@ -20,7 +20,7 @@ struct MeetingTimerView: View {
                 VStack {
 //                    Text(currentSpeaker)
 //                        .font(.title)
-                    Text("is speaking")
+                    Text("You are able to talk")
                     Image(systemName: isRecording ? "mic" : "mic.slash")
                         .font(.title)
                         .padding(.top)

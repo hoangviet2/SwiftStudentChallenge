@@ -12,11 +12,15 @@ struct ScrumsView: View {
     
     var body: some View {
         NavigationStack {
+            
             List($scrums.sorted(by: { $0.deadline.wrappedValue < $1.deadline.wrappedValue })) { $scrum in
-                NavigationLink(destination: DetailView(scrum: $scrum)) {
-                    CardView(scrum: scrum)
-                }
-                .listRowBackground(scrum.theme.mainColor)
+                //if(scrum.isDone == false){
+                    NavigationLink(destination: DetailView(scrum: $scrum)) {
+                        CardView(scrum: scrum)
+                    }
+                    .listRowBackground(scrum.theme.mainColor)
+
+                //}
             }
             .navigationTitle("Greeting,")
             .toolbar {

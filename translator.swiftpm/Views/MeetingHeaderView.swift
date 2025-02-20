@@ -29,19 +29,11 @@ struct MeetingHeaderView: View {
                     Text("Seconds Elapsed")
                         .font(.caption)
                     Label("\(secondsElapsed)", systemImage: "hourglass.tophalf.fill")
+                    Text("Tell about your feeling when you doing this task?\nIs this task hard for you?")
                 }
-//                Spacer()
-//                VStack(alignment: .trailing) {
-//                    Text("Seconds Remaining")
-//                        .font(.caption)
-//                    Label("\(secondsRemaining)", systemImage: "hourglass.bottomhalf.fill")
-//                        .labelStyle(.trailingIcon)
-//                }
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Time remaining")
-        .accessibilityValue("\(minutesRemaining) minutes")
         .padding([.top, .horizontal])
     }
 }

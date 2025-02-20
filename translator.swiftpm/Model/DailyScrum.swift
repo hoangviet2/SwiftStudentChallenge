@@ -10,6 +10,7 @@ struct DailyScrum: Identifiable, Codable {
     var lengthInMinutes: Int
     var priority: Priority
     var deadline: Date
+    var isDone : Bool = false
     var description: String
     var question:[String] =  ["feeling"]
     var attendees: [Attendee]

@@ -72,7 +72,6 @@ class Sentclass {
         let respath = Bundle(for: self).url(forResource: "ML/Sentclass", withExtension: "mlmodel")!
         return try! MLModel.compileModel(at: respath)
     }
-
     /**
         Construct Sentclass instance with an existing MLModel object.
 

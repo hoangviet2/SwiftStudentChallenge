@@ -17,6 +17,14 @@ struct DetailView: View {
                     Label("Done", systemImage: "checkmark.circle.fill")
                         .font(.headline)
                         .foregroundColor(.accentColor)
+                        .onDisappear(perform: {
+                            if !scrum.history.isEmpty {
+                                scrum.isDone = true;
+                                print("Here")
+                            }
+                            
+                            
+                        })
                 }
                 HStack {
                     Label("Deadline: ", systemImage: "calendar.badge.exclamationmark")
@@ -43,23 +51,26 @@ struct DetailView: View {
                 }
                 .accessibilityElement(children: .combine)
             }
-//            Section(header: Text("Attendees")) {
-//                ForEach(scrum.attendees) { attendee in
-//                    Label(attendee.name, systemImage: "person")
-//                }
-//            }
-            Section(header: Text("History")) {
+            Section(header: Text("diagnostic")) {
                 if scrum.history.isEmpty {
-                    Label("No meetings yet", systemImage: "calendar.badge.exclamationmark")
-                }
-                ForEach(scrum.history) { history in
-                    NavigationLink(destination: HistoryView(history: history)) {
+                    Label("You need to click done", systemImage: "cursorarrow.click.badge.clock")
+                }else{
+                    NavigationLink(destination: HistoryView(history: scrum.history[0])) {
                         HStack {
                             Image(systemName: "calendar")
-                            Text(history.date, style: .date)
+                            Text(scrum.history[0].date, style: .date)
                         }
                     }
+                    
                 }
+                //                ForEach(scrum.history) { history in
+                //                    NavigationLink(destination: HistoryView(history: history)) {
+                //                        HStack {
+                //                            Image(systemName: "calendar")
+                //                            Text(history.date, style: .date)
+                //                        }
+                //                    }
+                //                }
             }
             Section(header: Text("Description")) {
                 if scrum.description.isEmpty {
