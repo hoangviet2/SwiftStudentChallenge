@@ -14,7 +14,7 @@ struct PopUpView: View {
     var body: some View {
         ZStack {
             // Blurred background
-            Color.black.opacity(isPresented ? 0.9 : 0)
+            Color.black.opacity(isPresented ? 0.3 : 0)
                 .ignoresSafeArea()
                 .blur(radius: isPresented ? 10 : 0)
             VStack() {

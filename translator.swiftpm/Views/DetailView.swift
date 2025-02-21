@@ -54,23 +54,15 @@ struct DetailView: View {
             Section(header: Text("diagnostic")) {
                 if scrum.history.isEmpty {
                     Label("You need to click done", systemImage: "cursorarrow.click.badge.clock")
-                }else{
-                    NavigationLink(destination: HistoryView(history: scrum.history[0])) {
+                }
+                ForEach(scrum.history) { history in
+                    NavigationLink(destination: HistoryView(history: history)) {
                         HStack {
                             Image(systemName: "calendar")
-                            Text(scrum.history[0].date, style: .date)
+                            Text(history.date, style: .date)
                         }
                     }
-                    
                 }
-                //                ForEach(scrum.history) { history in
-                //                    NavigationLink(destination: HistoryView(history: history)) {
-                //                        HStack {
-                //                            Image(systemName: "calendar")
-                //                            Text(history.date, style: .date)
-                //                        }
-                //                    }
-                //                }
             }
             Section(header: Text("Description")) {
                 if scrum.description.isEmpty {

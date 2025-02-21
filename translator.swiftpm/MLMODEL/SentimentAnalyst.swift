@@ -13,7 +13,15 @@ class SentimentAnalyst{
                         "1":"joy",
                         "2":"love",
                         "3":"anger",
-                        "4":"fear","5":"surprise"]
+                        "4":"fear",
+                        "5":"surprise"]
+    let reversed = ["sadness":0,
+                        "joy":1,
+                        "love":2,
+                        "anger":3,
+                        "fear":4,
+                        "surprise":5]
+
     
     /// The underlying Core ML Model.
     var SentModel: Sentclass {

@@ -13,7 +13,12 @@ struct ScrumsView: View {
     var body: some View {
         NavigationStack {
             
-            List($scrums.sorted(by: { $0.deadline.wrappedValue < $1.deadline.wrappedValue })) { $scrum in
+            List($scrums.sorted(by: {
+                if $0.isDone.wrappedValue == $1.isDone.wrappedValue {
+                    return $0.deadline.wrappedValue < $1.deadline.wrappedValue
+                }
+                return !$0.isDone.wrappedValue && $1.isDone.wrappedValue
+            })) { $scrum in
                 //if(scrum.isDone == false){
                     NavigationLink(destination: DetailView(scrum: $scrum)) {
                         CardView(scrum: scrum)
