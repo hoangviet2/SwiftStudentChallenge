@@ -55,10 +55,10 @@ final class ScrumTimer: ObservableObject {
         - lengthInMinutes: The meeting length.
         -  attendees: A list of attendees for the meeting.
      */
-    init(lengthInMinutes: Int = 0, attendees: [DailyScrum.Attendee] = []) {
+    init(lengthInMinutes: Int = 0, attendees: [DailyTask.Question] = []) {
         //print(DailyScrum.Attendee.name)
         print(attendees.count)
-        self.lengthInMinutes = lengthInMinutes
+        self.lengthInMinutes = 1
         self.speakers = attendees.speakers
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
@@ -117,7 +117,7 @@ final class ScrumTimer: ObservableObject {
 //                return
 //            }
             
-            //secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
+            secondsRemaining = max(lengthInSeconds - self.secondsElapsed, 0)
 //            secondsRemaining = self.secondsElapsed
 //            print(secondsRemaining)
 //            if secondsElapsedForSpeaker >= secondsPerSpeaker {
@@ -134,14 +134,14 @@ final class ScrumTimer: ObservableObject {
          - lengthInMinutes: The meeting length.
          - attendees: The name of each attendee.
      */
-    func reset(lengthInMinutes: Int, attendees: [DailyScrum.Attendee]) {
+    func reset(lengthInMinutes: Int, attendees: [DailyTask.Question]) {
         self.lengthInMinutes = lengthInMinutes
         self.speakers = attendees.speakers
         secondsRemaining = lengthInSeconds
         activeSpeaker = speakerText
     }
 }
-extension Array<DailyScrum.Attendee> {
+extension Array<DailyTask.Question> {
     var speakers: [ScrumTimer.Speaker] {
         if isEmpty {
             return [ScrumTimer.Speaker(name: "Speaker 1", isCompleted: false)]

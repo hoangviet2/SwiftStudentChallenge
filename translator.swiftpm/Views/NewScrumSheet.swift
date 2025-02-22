@@ -5,9 +5,10 @@
 import SwiftUI
 
 struct NewScrumSheet: View {
-    @State private var newScrum = DailyScrum.emptyScrum
-    @Binding var scrums: [DailyScrum]
+    @State private var newScrum = DailyTask.emptyScrum
+    @Binding var scrums: [DailyTask]
     @Binding var isPresentingNewScrumView: Bool
+    //@FocusState var isFocusOnDescription: Bool
     
     var body: some View {
         NavigationStack {
@@ -31,6 +32,6 @@ struct NewScrumSheet: View {
 
 struct NewScrumSheet_Previews: PreviewProvider {
     static var previews: some View {
-        NewScrumSheet(scrums: .constant(DailyScrum.sampleData), isPresentingNewScrumView: .constant(true))
+        NewScrumSheet(scrums: .constant(DailyTask.sampleData), isPresentingNewScrumView: .constant(true))
     }
 }

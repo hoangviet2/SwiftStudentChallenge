@@ -5,7 +5,7 @@
 import SwiftUI
 
 struct ScrumsView: View {
-    @Binding var scrums: [DailyScrum]
+    @Binding var scrums: [DailyTask]
     @Environment(\.scenePhase) private var scenePhase
     @State private var isPresentingNewScrumView = false
     let saveAction: ()->Void
@@ -48,6 +48,6 @@ struct ScrumsView: View {
 
 struct ScrumsView_Previews: PreviewProvider {
     static var previews: some View {
-        ScrumsView(scrums: .constant(DailyScrum.sampleData), saveAction: {})
+        ScrumsView(scrums: .constant(DailyTask.sampleData), saveAction: {})
     }
 }

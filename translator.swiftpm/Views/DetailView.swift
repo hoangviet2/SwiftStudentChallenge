@@ -5,8 +5,8 @@
 import SwiftUI
 
 struct DetailView: View {
-    @Binding var scrum: DailyScrum
-    @State private var editingScrum = DailyScrum.emptyScrum
+    @Binding var scrum: DailyTask
+    @State private var editingScrum = DailyTask.emptyScrum
 
     @State private var isPresentingEditView = false
     
@@ -107,7 +107,7 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            DetailView(scrum: .constant(DailyScrum.sampleData[0]))
+            DetailView(scrum: .constant(DailyTask.sampleData[0]))
         }
     }
 }

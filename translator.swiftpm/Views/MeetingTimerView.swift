@@ -8,18 +8,15 @@ struct MeetingTimerView: View {
     let speakers: [ScrumTimer.Speaker]
     let isRecording: Bool
     let theme: Theme
-    
-//    private var currentSpeaker: String {
-//        speakers.first(where: { !$0.isCompleted })?.name ?? "Someone"
-//    }
+    @State private var isTranscriptionEnabled: Bool = true
+    @Environment(\.dismiss) private var dismiss
+    var onTranscriptionToggle: () -> Void
     
     var body: some View {
         Circle()
             .strokeBorder(lineWidth: 24)
             .overlay {
                 VStack {
-//                    Text(currentSpeaker)
-//                        .font(.title)
                     Text("You are able to talk")
                     Image(systemName: isRecording ? "mic" : "mic.slash")
                         .font(.title)
@@ -38,7 +35,22 @@ struct MeetingTimerView: View {
                     }
                 }
             }
-            .padding(.horizontal)
+        // Toggle Button for Speech Transcription
+        Button(action: {
+            isTranscriptionEnabled.toggle()
+            dismiss()
+        }) {
+            HStack {
+                Image(systemName: isTranscriptionEnabled ? "checkmark.seal" : "checkmark.seal.fill")
+                Text(isTranscriptionEnabled ? "Transcription On" : "Transcription Off")
+            }
+            .padding()
+            .background(Color.gray)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            //.animation(.easeInOut, value: isTranscriptionEnabled)
+        }
+        .padding(.top, 10)
     }
 }
 
@@ -48,6 +60,8 @@ struct MeetingTimerView_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        MeetingTimerView(speakers: speakers, isRecording: true, theme: .yellow)
+        MeetingTimerView(speakers: speakers, isRecording: true, theme: .yellow) {
+            print("Hello")
+        }
     }
 }

@@ -11,8 +11,6 @@ struct HistoryView: View {
     var body: some View {
         ScrollView{
             VStack(alignment: .leading, spacing: 7) {
-//                Divider()
-//                    .padding(.bottom)
                 if let transcript = history.transcript {
                     Text("Transcript")
                         .font(.headline)
@@ -60,7 +58,6 @@ struct HistoryView: View {
             .navigationTitle(Text(history.date, style: .date))
             .padding(.horizontal, 25)
             .padding(.bottom, 30)
-            
         }
     }
 }

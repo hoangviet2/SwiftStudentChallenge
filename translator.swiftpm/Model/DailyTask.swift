@@ -4,7 +4,7 @@
 
 import Foundation
 
-struct DailyScrum: Identifiable, Codable {
+struct DailyTask: Identifiable, Codable {
     let id: UUID
     var title: String
     var lengthInMinutes: Int
@@ -13,7 +13,7 @@ struct DailyScrum: Identifiable, Codable {
     var isDone : Bool = false
     var description: String
     var question:[String] =  ["feeling"]
-    var attendees: [Attendee]
+    var questionlist: [Question]
     var lengthInMinutesAsDouble: Double {
         get {
             Double(lengthInMinutes)
@@ -33,12 +33,12 @@ struct DailyScrum: Identifiable, Codable {
         self.priority = priority
         self.deadline = deadline
         self.description = description
-        self.attendees = question.map {Attendee(name: $0)}
+        self.questionlist = question.map {Question(name: $0)}
     }
 }
 
-extension DailyScrum {
-    struct Attendee: Identifiable, Codable {
+extension DailyTask {
+    struct Question: Identifiable, Codable {
         let id: UUID
         var name: String
         
@@ -48,23 +48,23 @@ extension DailyScrum {
         }
     }
     
-    static var emptyScrum: DailyScrum {
-        DailyScrum(title: "", lengthInMinutes: 1, theme: .sky, priority: .low, deadline: Date.now, description: "")
+    static var emptyScrum: DailyTask {
+        DailyTask(title: "", lengthInMinutes: 1, theme: .sky, priority: .low, deadline: Date.now, description: "")
     }
 }
 
-extension DailyScrum {
-    static let sampleData: [DailyScrum] =
+extension DailyTask {
+    static let sampleData: [DailyTask] =
     [
-        DailyScrum(title: "Study",
+        DailyTask(title: "Study",
                    lengthInMinutes: 1,
                    theme: .yellow,
                    priority: .low, deadline: Date.now,description: "Come to class"),
-        DailyScrum(title: "Code",
+        DailyTask(title: "Code",
                    lengthInMinutes: 1,
                    theme: .orange,
                    priority: .medium, deadline: Date.now,description: "Coding Swift"),
-        DailyScrum(title: "Eat",
+        DailyTask(title: "Eat",
                    lengthInMinutes: 1,
                    theme: .poppy,
                    priority: .high, deadline: Date.now,description: "Eating")

@@ -45,7 +45,7 @@ struct MeetingFooterView_Previews: PreviewProvider {
     static var previews: some View {
         //MeetingFooterView(speakers: DailyScrum.sampleData[0].attendees.speakers, skipAction: {})
             //.previewLayout(.sizeThatFits)
-        MeetingFooterView(speakers: DailyScrum.sampleData[0].attendees.speakers,skipAction: {})
+        MeetingFooterView(speakers: DailyTask.sampleData[0].questionlist.speakers,skipAction: {})
             .previewLayout(.sizeThatFits)
     }
 }

@@ -34,7 +34,7 @@ struct MyApp: App {
                     }
                 }
                 .sheet(item: $errorWrapper) {
-                    store.scrums = DailyScrum.sampleData
+                    store.scrums = DailyTask.sampleData
                 } content: { wrapper in
                     ErrorView(errorWrapper: wrapper)
                 }
