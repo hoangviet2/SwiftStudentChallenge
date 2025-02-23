@@ -58,6 +58,7 @@ struct HistoryView: View {
             .navigationTitle(Text(history.date, style: .date))
             .padding(.horizontal, 25)
             .padding(.bottom, 30)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }

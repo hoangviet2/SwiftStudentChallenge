@@ -16,8 +16,6 @@ let package = Package(
         .iOSApplication(
             name: "translator",
             targets: ["AppModule"],
-            bundleIdentifier: "hoangviet.translator",
-            teamIdentifier: "JRSZ4688V4",
             displayVersion: "1.0",
             bundleVersion: "1",
             appIcon: .placeholder(icon: .cloud),
